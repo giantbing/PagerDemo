@@ -1,22 +1,28 @@
 package com.zonglinks.giant.pagerdemo;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private MyViewPagger viewPager;
+    private TextView change,changeNew;
     private List<ImageView> imageViews = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewPager = (MyViewPagger)findViewById(R.id.viewPager);
+        change = (TextView)findViewById(R.id.change);
+        changeNew= (TextView)findViewById(R.id.changenew);
         initData();
         initView();
     }
@@ -31,6 +37,26 @@ public class MainActivity extends AppCompatActivity {
 //        });
         viewPager.setPageTransformer(true, new GallyPageTransformer());
         viewPager.setAdapter(new MyViewPager(imageViews));
+        viewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,WebViewActivity.class);
+                startActivity(intent);
+            }
+        });
+        changeNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,WebNewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void initData(){
         final ImageView first = new ImageView(MainActivity.this);
